@@ -16,16 +16,30 @@ typedef struct __stack{
 node * make_node(DATA input){
     node * temp;
     temp = (node*)malloc(sizeof(node));
+    if(target == NULL){
+        fputs("Memory allocation failed while making node.\n");
+        return NULL;
+    }
     temp->next = NULL;
     temp->data = input;
 
     return temp;
 }
 
-void InitStack(stack * target){
+int InitStack(stack * target){
+    //스택 할당
+    target = (stack *)malloc(sizeof(stack));
+    if(target == NULL){
+        fputs("Memory allocation failed while initializing stack.\n");
+        return 2;
+    }
+    
     //더미 노드 생성
     node * temp;
     temp = make_node(0);
+    if(temp == NULL){
+        return 2;
+    }
 
     //헤드와 연결 및 개수 초기화
     target->head = temp;
@@ -40,9 +54,8 @@ int Push(stack * target, DATA input){
     //새 노드 생성
     node * new;
     new = make_node(input);
-    if(new == NULL){
-        fputs("Memory is not enough.\n", stderr);
-        return 1;
+    if(temp == NULL){
+        return 2;
     }
     new->next = temp;
     
@@ -54,7 +67,7 @@ int Push(stack * target, DATA input){
 
 int Pop(stack * target, DATA * output){
     if(target->count == 0){
-        fputs("This stack is empty,\n", stderr);
+        fputs("This stack is empty.\n", stderr);
         return 1;
     }
     //임시 포인터에 헤드 연결

@@ -29,6 +29,7 @@ void InitQueue(queue * target){
     dummy = MakeNode(0);
 
     //연결 및 개수 초기화
+    target = (queue *)malloc(sizeof(queue));
     target->front = dummy;
     target->rear = dummy;
     target->count = 0;

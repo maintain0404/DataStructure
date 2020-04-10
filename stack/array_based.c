@@ -9,10 +9,20 @@ typedef struct __stack{
     DATA * data;
 }stack;
 
-void InitStack(stack * target, int stack_size){
+int InitStack(stack * target, int stack_size){
+    target = (stack *)malloc(sizeof(stack));
+    if(target == NULL){
+        fputs("Memory allocation failed while making stack.\n");
+        return 2;
+    }
     target->size = stack_size;
     target->count = 0;
     target->data = malloc(stack_size * sizeof(DATA));
+    if(target == NULL){
+        fputs("Memory allocation failed while making stack.\n");
+        return 2;
+    }
+    return 0;
 }
 
 int Push(stack * target, DATA input){
@@ -41,4 +51,5 @@ int Count(stack * target){
 
 void DeleteStack(stack * target){
     free(target->data);
+    free(target);
 }

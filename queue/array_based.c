@@ -18,6 +18,7 @@ int InitQueue(queue * target, int size){
     } 
 
     //설정
+    target = (queue *)malloc(sizeof(queue));
     target->size = size;
     target->front = 0;
     target->rear = 1;
@@ -61,4 +62,5 @@ int Count(queue * target){
 
 void DeleteQueue(queue * target){
     free(target->data);
+    free(target);
 }
