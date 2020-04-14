@@ -26,7 +26,7 @@ node * make_node(DATA input){
     return temp;
 }
 
-int InitStack(stack * target){
+int InitStack(stack ** target){
     //스택 할당
     target = (stack *)malloc(sizeof(stack));
     if(target == NULL){

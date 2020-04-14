@@ -17,6 +17,10 @@ typedef struct __queue{
 node * MakeNode(DATA input){
     node * temp;
     temp = (node*)malloc(sizeof(node));
+    if(temp == NULL){
+        fputs("Memory allocation failed while making node\n", stderr);
+        return NULL;
+    }
     temp->next = NULL;
     temp->data = input;
 
@@ -28,8 +32,8 @@ void InitQueue(queue * target){
     node * dummy;
     dummy = MakeNode(0);
 
+    printf("init\n");
     //연결 및 개수 초기화
-    target = (queue *)malloc(sizeof(queue));
     target->front = dummy;
     target->rear = dummy;
     target->count = 0;
@@ -53,12 +57,12 @@ int Enqueue(queue * target, DATA input){
 
 int Dequeue(queue * target, DATA * output){
     if(target->front == target->rear){
-        fputs("This stack is empty,\n", stderr);
+        fputs("This queue is empty.\n", stderr);
         return 1;
     }
     //임시 포인터에 프론트 연결
     node * temp;
-    temp = target->front
+    temp = target->front;
 
     //프론트 이동
     target->front = target->front->next;
