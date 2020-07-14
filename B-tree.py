@@ -26,15 +26,18 @@ class Node:
         return [self._datas[x] for x in range(1, self._level * 2, 2)]
 
     def _insert(self, new_data, return_min_or_max = 'max'):
+        if self.include(new_data):
+            raise DataAleadyExistError
         if self.is_leaf():
             if emtpy_index := self.empty_data_index(): 
                 self._add_new_to_leaf(new_data)
                 return None
             else:
-                
+                datas = [self._datas[x] for x in range(1, self._level * 2, 2)]
+                datas.append(new_data)
+                sort(datas)
+                return datas.pop(self._level * 2)
         else:
-            if self.include(new_data):
-                raise DataAleadyExistError
             new_data_index = self.find_data_index()
             if new_data_index == self._level * 2:
                 data_get_back = self.datas[new_data_index]._insert(new_data)
